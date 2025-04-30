@@ -77,6 +77,31 @@ function AddNewBooking() {
         Swal.fire("Deleted", "Booking removed", "success");
         dispatch(getBookings());
     };
+    const handleEdit = (booking: any) => {
+        setBookingId(booking.id);
+        setCustomerName(booking.customerName);
+        setAddress(booking.address);
+        setDateAndTime(booking.dateAndTime);
+        setServiceType(booking.serviceType);
+        setUserId(booking.userId);
+        setIsEditing(true);
+    };
+
+    const handleUpdate = () => {
+        if (!validateFields()) return;
+        const isoDate = new Date(dateAndTime);
+        const updated = {
+            id: bookingId,
+            customerName,
+            address,
+            dateTime: isoDate.toISOString(),
+            serviceType,
+            userId: parseInt(userId),
+        };
+        dispatch(updateBooking(updated));
+        Swal.fire("Updated", "Booking updated!", "success");
+        resetForm();
+    };
     return (
         <div className="p-6">
             <div className="grid grid-cols-2 gap-4 mb-4">

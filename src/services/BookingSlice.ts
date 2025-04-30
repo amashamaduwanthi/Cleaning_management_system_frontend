@@ -28,6 +28,13 @@ export const deleteBooking = createAsyncThunk(
         return id;
     }
 );
+export const updateBooking = createAsyncThunk(
+    'booking/updateBooking',
+    async (booking: Booking) => {
+        const response = await api.put(`/update/${booking.id}`, booking);
+        return response.data;
+    }
+);
 
 const bookingSlice = createSlice({
     name: 'booking',
@@ -51,7 +58,10 @@ const bookingSlice = createSlice({
            .addCase(deleteBooking.fulfilled, (state, action) => {
             return state.filter(b => b.bookingId !== action.payload);
            })
-
+            .addCase(updateBooking.fulfilled, (state, action) => {
+                const index = state.findIndex(b => b.bookingId === action.payload.bookingId);
+                if (index !== -1) state[index] = action.payload;
+            });
     }
 });
 
