@@ -7,8 +7,8 @@ export function Navigation() {
             <header className="bg-teal-900 text-white shadow=lg " >
                 <nav className="px-4 py-3">
                     <ul className="flex space-x-4">
-                        <Link to="/home" className='custom-link'>Home</Link>
-                        <Link to="/service" className='custom-link'>Service</Link>
+                        <Link to="" className='custom-link'>Home</Link>
+
                     </ul>
                 </nav>
             </header>

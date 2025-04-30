@@ -1,15 +1,20 @@
 import React from "react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {RootLayout} from "./components/RootLayout.tsx";
+import {Home} from "./pages/Home.tsx";
+import {Provider} from "react-redux";
+import {store} from "./services/store.ts";
+import AddNewBooking from "./pages/AddNewBooking.tsx";
+import Service from "./pages/Service.tsx";
 const App: React.FC = () => {
     const routes=createBrowserRouter([
         {
             path:'',
             element:<RootLayout/>,
             children:[
-                {path:'/home',element:<Home/>},
-                {path:'/home/Add',element:<AddNewBooking/>},
-                {path:'/service',element:<Service/>},
+                {path:'/',element:<Home/>},
+                {path:'/home/AddBooking',element:<AddNewBooking/>},
+                {path:'/home/AddService',element:<Service/>},
 
             ]
         }
