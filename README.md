@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Cleaning Service Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This web application allows users to book cleaning services and manage their bookings. It also includes an admin panel for managing service offerings and overseeing all bookings.
 
-Currently, two official plugins are available:
+## Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### User Functionality:
+1. **Book a Cleaning Service**:
+    - Add a booking with fields like:
+        - Customer Name
+        - Address
+        - Date and Time
+        - Service Type (dropdown: e.g., Deep Cleaning, Carpet Cleaning, etc.)
+          -userId
 
-## Expanding the ESLint configuration
+2. **View and Manage Bookings**:
+    - List all bookings made by the user.
+    - Edit or cancel a booking.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    ### Technical Requirements
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### Backend:
+- **Endpoints for Users**:
+    - `GET /bookings`: Retrieve all bookings for the logged-in user.
+    - `POST /bookings`: Add a new booking.
+    - `PUT /bookings/:id`: Update a specific booking.
+    - `DELETE /bookings/:id`: Cancel a booking.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### Frontend:
+- **User Pages**:
+    - **Dashboard**: List all bookings for the logged-in user.
+    - **Booking Form**: Add or edit a booking.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Tools & Technologies Used
+
+- **Frontend**:
+    - React
+    - Material UI / Tailwind CSS for styling
+    - Axios for API calls
+
+- **Backend**:
+    - Node.js with Express
+    - Prisma for ORM
+    -  MySQL
+
+- **Database**:
+    -  MySQL
+
+### Steps to Setup:
+
+1. **Clone the Repository**:
+   ```bash
+   --backned
+   git clone https://github.com/amashamaduwanthi/Cleaning_management_system.git
+   --frontend
+   git clone https://github.com/amashamaduwanthi/Cleaning_management_system_frontend.git
+   cd cleaning-service-management
