@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import {getBookings} from "../services/BookingSlice.ts";
 function AddNewBooking() {
     const bookings = useSelector((state: any) => state.booking);
     const dispatch = useDispatch();
@@ -12,6 +13,11 @@ function AddNewBooking() {
     const [serviceType, setServiceType] = useState("");
     const [userId, setUserId] = useState("");
     const [isEditing, setIsEditing] = useState(false);
+    useEffect(() => {
+        dispatch(getBookings());
+    }, [dispatch]);
+
+
     const resetForm = () => {
         setBookingId("");
         setCustomerName("");

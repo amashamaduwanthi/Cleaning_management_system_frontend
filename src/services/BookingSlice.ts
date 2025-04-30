@@ -14,6 +14,14 @@ export const saveBooking = createAsyncThunk(
         return response.data;
     }
 );
+export const getBookings = createAsyncThunk(
+    'booking/getBookings',
+    async () => {
+        const response = await api.get('/view');
+        return response.data;
+    }
+);
+
 const bookingSlice = createSlice({
     name: 'booking',
     initialState,
@@ -30,6 +38,9 @@ const bookingSlice = createSlice({
             .addCase(saveBooking.fulfilled, (state, action) => {
                 state.push(action.payload);
             })
+            .addCase(getBookings.fulfilled, (_, action) => {
+                return action.payload;
+            });
 
     }
 });
