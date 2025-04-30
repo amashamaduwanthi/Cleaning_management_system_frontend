@@ -21,6 +21,13 @@ export const getBookings = createAsyncThunk(
         return response.data;
     }
 );
+export const deleteBooking = createAsyncThunk(
+    'booking/deleteBooking',
+    async (id: string) => {
+        await api.delete(`/delete/${parseInt(id)}`);
+        return id;
+    }
+);
 
 const bookingSlice = createSlice({
     name: 'booking',
@@ -40,7 +47,10 @@ const bookingSlice = createSlice({
             })
             .addCase(getBookings.fulfilled, (_, action) => {
                 return action.payload;
-            });
+            })
+           .addCase(deleteBooking.fulfilled, (state, action) => {
+            return state.filter(b => b.bookingId !== action.payload);
+           })
 
     }
 });

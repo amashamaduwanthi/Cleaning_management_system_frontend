@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import {getBookings} from "../services/BookingSlice.ts";
+import {deleteBooking, getBookings, saveBooking} from "../services/BookingSlice.ts";
 function AddNewBooking() {
     const bookings = useSelector((state: any) => state.booking);
     const dispatch = useDispatch();
@@ -71,6 +71,11 @@ function AddNewBooking() {
         dispatch(saveBooking(newBooking));
         Swal.fire("Success", "Booking added!", "success");
         resetForm();
+    };
+    const handleDelete = (id: string) => {
+        dispatch(deleteBooking(id));
+        Swal.fire("Deleted", "Booking removed", "success");
+        dispatch(getBookings());
     };
     return (
         <div className="p-6">
