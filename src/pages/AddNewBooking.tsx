@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 function AddNewBooking() {
     const bookings = useSelector((state: any) => state.booking);
     const dispatch = useDispatch();
@@ -10,8 +11,61 @@ function AddNewBooking() {
     const [dateAndTime, setDateAndTime] = useState("");
     const [serviceType, setServiceType] = useState("");
     const [userId, setUserId] = useState("");
-
     const [isEditing, setIsEditing] = useState(false);
+    const resetForm = () => {
+        setBookingId("");
+        setCustomerName("");
+        setAddress("");
+        setDateAndTime("");
+        setServiceType("");
+        setUserId("");
+        setIsEditing(false);
+    };
+
+    const validateFields = () => {
+        const namePattern = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
+        if (!customerName || customerName.length < 3 || !namePattern.test(customerName)) {
+            Swal.fire("Error", "Customer name must be at least 3 characters long and start with capital letters", "error");
+            return false;
+        }
+        if (!address || address.length < 5) {
+            Swal.fire("Error", "Address must be at least 5 characters long", "error");
+            return false;
+        }
+
+        if (!dateAndTime || isNaN(new Date(dateAndTime).getTime())) {
+            Swal.fire("Error", "Invalid date and time!", "error");
+            return false;
+        }
+
+        if (!serviceType) {
+            Swal.fire("Error", "Service type is required!", "error");
+            return false;
+        }
+
+        if (!userId || isNaN(Number(userId))) {
+            Swal.fire("Error", "User ID must be a valid number", "error");
+            return false;
+        }
+
+        return true;
+    };
+
+    const handleAdd = () => {
+        if (!validateFields()) return;
+
+        const newBooking = {
+            id: crypto.randomUUID(),
+            customerName,
+            address,
+            dateTime: new Date(dateAndTime).toISOString(),
+            serviceType,
+            userId: parseInt(userId),
+        };
+        dispatch(saveBooking(newBooking));
+        Swal.fire("Success", "Booking added!", "success");
+        resetForm();
+    };
     return (
         <div className="p-6">
             <div className="grid grid-cols-2 gap-4 mb-4">
